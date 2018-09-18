@@ -1,18 +1,18 @@
-import lock.Lock;
-import lock.PetersonLock;
-import lock.TournamentPetersonLock;
-import test.TestLock;
+import cs6301.github.io.lock.Lock;
+import cs6301.github.io.lock.TournamentPetersonLock;
+import cs6301.github.io.test.TestLock;
 
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-        Lock lock = new TournamentPetersonLock(5);
 
-        int count = 32;
-        Thread[] threads = new Thread[count];
-        for (int i = 0; i < count; i++) {
-            threads[i] = new Thread(new TestLock(lock, i));
+        int threadNum = Integer.parseInt(args[0]);
+
+        Lock lock = new TournamentPetersonLock(threadNum);
+
+        Thread[] threads = new Thread[threadNum];
+        for (int i = 0; i < threadNum; i++) {
+            threads[i] = new Thread(new TestLock(lock, i, 500 * i));
         }
         for (Thread t : threads)
             t.start();

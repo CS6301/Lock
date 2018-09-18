@@ -1,6 +1,6 @@
-package test;
+package cs6301.github.io.test;
 
-import lock.Lock;
+import cs6301.github.io.lock.Lock;
 
 public class TestLock implements Runnable {
 
@@ -8,17 +8,19 @@ public class TestLock implements Runnable {
 
     private Lock lock;
     private int id;
+    private int iteration;
 
-    public TestLock(Lock lock, int id) {
+    public TestLock(Lock lock, int id, int iterations) {
         this.lock = lock;
         this.id = id;
+        this.iteration = iterations;
     }
 
     @Override
     public void run() {
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < this.iteration; i++) {
             this.lock.lock();
-            shared ++;
+            shared++;
             System.out.println(this.id + " increment shared value to " + shared);
             this.lock.unlock();
         }

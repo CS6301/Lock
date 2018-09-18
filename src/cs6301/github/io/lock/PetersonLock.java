@@ -1,6 +1,5 @@
-package lock;
+package cs6301.github.io.lock;
 
-import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class PetersonLock implements Lock {
