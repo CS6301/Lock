@@ -5,39 +5,26 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        int threadNum = 2;
-        int iteration = 100;
-        String LockType = "Peterson";
-        boolean verbose = false;
+        int coreNum = 2;
+        int iteration = 10000;
         if (args.length >= 1)
-            threadNum = Integer.parseInt(args[0]);
+            coreNum = Integer.parseInt(args[0]);
         if (args.length >= 2)
             iteration = Integer.parseInt(args[1]);
-        if (args.length >= 3)
-            LockType = args[2];
 
-        if (args[args.length - 1].endsWith("verbose"))
-            verbose = true;
-
-        Lock lock;
-        switch (LockType) {
-            case "Tournament":
-                lock = new TournamentPetersonLock(threadNum);
-                break;
-            case "Bakery":
-                lock = new Bakery(threadNum);
-                break;
-            default:
-                lock = new PetersonLock();
-                threadNum = 2;
+        System.out.printf("Threads\tT\tB\n");
+        for (int threadNum = 2; threadNum <= coreNum; threadNum++) {
+            System.out.printf("%d\t\t%d\tt%d\n",
+                threadNum,
+                test(new TournamentPetersonLock(threadNum), threadNum, iteration),
+                test(new Bakery(threadNum), threadNum, iteration));
         }
+    }
 
+    static long test(Lock lock, int threadNum, int iteration) throws InterruptedException {
         Thread[] threads = new Thread[threadNum];
         for (int i = 0; i < threadNum; i++) {
             threads[i] = new Thread(new TestLock(lock, i, iteration));
-        }
-        if (verbose) {
-            System.out.printf("Running %d thread with %d iteration.\n", threadNum, iteration);
         }
         TestLock.reset();
         Timer timer = new Timer();
@@ -46,9 +33,6 @@ public class Main {
 
         for (Thread t : threads)
             t.join();
-        System.out.println(timer.end());
-        if (verbose) {
-            System.out.printf("Shared value after execution: %d", TestLock.shared);
-        }
+        return timer.end().getElapsedTime();
     }
 }

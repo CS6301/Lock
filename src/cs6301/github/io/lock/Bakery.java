@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.concurrent.atomic.AtomicLongArray;
 
 public class Bakery implements Lock {
+
     final private AtomicInteger id = new AtomicInteger(0);
 
     private ThreadLocal<Integer> THREAD_ID = new ThreadLocal<Integer>() {

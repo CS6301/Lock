@@ -19,6 +19,18 @@ public class Timer {
         return this;
     }
 
+    public long getElapsedTime() {
+        return elapsedTime;
+    }
+
+    public long getMemAvailable() {
+        return memAvailable;
+    }
+
+    public long getMemUsed() {
+        return memUsed;
+    }
+
     public String toString() {
         return "Time: " + elapsedTime + " msec.\n" + "Memory: " + (memUsed / 1048576) + " MB / " + (memAvailable / 1048576) + " MB.";
     }
