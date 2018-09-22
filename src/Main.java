@@ -1,7 +1,5 @@
-import cs6301.github.io.lock.Lock;
-import cs6301.github.io.lock.TournamentPetersonLock;
-import cs6301.github.io.test.TestLock;
-import cs6301.github.io.test.Timer;
+import cs6301.github.io.lock.*;
+import cs6301.github.io.test.*;
 
 public class Main {
 
@@ -18,7 +16,7 @@ public class Main {
         if (args[args.length - 1].endsWith("verbose"))
             verbose = true;
 
-        Lock lock = new TournamentPetersonLock(threadNum);
+        Lock lock = new Bakery(threadNum);
 
         Thread[] threads = new Thread[threadNum];
         for (int i = 0; i < threadNum; i++) {
