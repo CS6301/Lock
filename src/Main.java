@@ -7,16 +7,30 @@ public class Main {
 
         int threadNum = 2;
         int iteration = 100;
+        String LockType = "Peterson";
         boolean verbose = false;
         if (args.length >= 1)
             threadNum = Integer.parseInt(args[0]);
         if (args.length >= 2)
             iteration = Integer.parseInt(args[1]);
+        if (args.length >= 3)
+            LockType = args[2];
 
         if (args[args.length - 1].endsWith("verbose"))
             verbose = true;
 
-        Lock lock = new Bakery(threadNum);
+        Lock lock;
+        switch (LockType) {
+            case "Tournament":
+                lock = new TournamentPetersonLock(threadNum);
+                break;
+            case "Bakery":
+                lock = new Bakery(threadNum);
+                break;
+            default:
+                lock = new PetersonLock();
+                threadNum = 2;
+        }
 
         Thread[] threads = new Thread[threadNum];
         for (int i = 0; i < threadNum; i++) {
