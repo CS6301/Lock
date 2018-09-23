@@ -12,12 +12,12 @@ public class Main {
         if (args.length >= 2)
             iteration = Integer.parseInt(args[1]);
 
-        System.out.println("Threads\tT\tB");
         for (int threadNum = 2; threadNum <= coreNum; threadNum++) {
-            System.out.printf("%d\t%d\t%d\n",
-                threadNum,
-                test(new TournamentPetersonLock(threadNum), threadNum, iteration),
-                test(new Bakery(threadNum), threadNum, iteration));
+            System.out.printf("(%d,%d)", threadNum, test(new TournamentPetersonLock(threadNum), threadNum, iteration));
+        }
+        System.out.println();
+        for (int threadNum = 2; threadNum <= coreNum; threadNum++) {
+            System.out.printf("(%d,%d)", threadNum, test(new Bakery(threadNum), threadNum, iteration));
         }
     }
 
