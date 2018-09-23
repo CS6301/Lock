@@ -25,12 +25,6 @@ public class TestLock implements Runnable {
         for (int i = 0; i < this.iteration; i++) {
             this.lock.lock();
             shared++;
-//            System.out.printf("thread %s increment shared var to %d.\n", id, shared);
-//            try {
-//                Thread.sleep(2);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
             this.lock.unlock();
         }
     }

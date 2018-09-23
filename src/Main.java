@@ -20,27 +20,27 @@ public class Main {
 
         System.out.println("Tournament lock benchmark:");
         for (int threadNum = 2; threadNum <= coreNum; threadNum++) {
-            System.out.printf("%d threads:\t", threadNum);
+            System.out.printf("%d & \t", threadNum);
             for (int experiment = 0; experiment < experimentNum; experiment++) {
                 long res = test(new TournamentPetersonLock(threadNum), threadNum, iteration);
                 tournament[threadNum] += res;
-                System.out.printf("%d\t", res);
+                System.out.printf("%d &\t", res);
             }
             tournament[threadNum] = tournament[threadNum] / experimentNum;
-            System.out.printf("\tAverage: %.2f\n", tournament[threadNum]);
+            System.out.printf("%.2f \\\\\n", tournament[threadNum]);
         }
         printResult(tournament, "Tournament lock");
         System.out.println();
         System.out.println("Bakery lock benchmark:");
         for (int threadNum = 2; threadNum <= coreNum; threadNum++) {
-            System.out.printf("%d threads:\t", threadNum);
+            System.out.printf("%d & \t", threadNum);
             for (int experiment = 0; experiment < experimentNum; experiment++) {
                 long res = test(new Bakery(threadNum), threadNum, iteration);
                 bakery[threadNum] += res;
-                System.out.printf("%d\t", res);
+                System.out.printf("%d &\t", res);
             }
             bakery[threadNum] = bakery[threadNum] / experimentNum;
-            System.out.printf("\tAverage: %.2f\n", bakery[threadNum]);
+            System.out.printf("%.2f \\\\\n", bakery[threadNum]);
         }
         printResult(tournament, "Bakery lock");
     }
@@ -65,7 +65,7 @@ public class Main {
         System.out.printf("Final result for %s:\n", lock);
 
         for (int i = 2; i < res.length; i++) {
-            System.out.printf("(%d,%.1f)\n", i, res[i]);
+            System.out.printf("(%d,%.2f)\n", i, res[i]);
         }
         System.out.println();
     }
