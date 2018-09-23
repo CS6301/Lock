@@ -15,34 +15,36 @@ public class Main {
         if (args.length >= 3)
             experimentNum = Integer.parseInt(args[2]);
 
-        double[] tournament = new double[coreNum + 1];
-        double[] bakery = new double[coreNum + 1];
+        double[] tournament = new double[coreNum + 2];
+        double[] bakery = new double[coreNum + 2];
 
         System.out.println("Tournament lock benchmark:");
         for (int threadNum = 2; threadNum <= coreNum; threadNum++) {
-            System.out.printf("%d & \t", threadNum);
+            System.out.printf("%d threads:\t", threadNum);
             for (int experiment = 0; experiment < experimentNum; experiment++) {
                 long res = test(new TournamentPetersonLock(threadNum), threadNum, iteration);
                 tournament[threadNum] += res;
-                System.out.printf("%d &\t", res);
+                System.out.printf("%d \t", res);
             }
             tournament[threadNum] = tournament[threadNum] / experimentNum;
-            System.out.printf("%.2f \\\\\n", tournament[threadNum]);
+            System.out.printf("%.2f \n", tournament[threadNum]);
         }
-        printResult(tournament, "Tournament lock");
+        printResult(tournament, "Tournament lock", coreNum);
         System.out.println();
         System.out.println("Bakery lock benchmark:");
         for (int threadNum = 2; threadNum <= coreNum; threadNum++) {
-            System.out.printf("%d & \t", threadNum);
+            System.out.printf("%d threads:\t", threadNum);
             for (int experiment = 0; experiment < experimentNum; experiment++) {
                 long res = test(new Bakery(threadNum), threadNum, iteration);
                 bakery[threadNum] += res;
-                System.out.printf("%d &\t", res);
+                System.out.printf("%d \t", res);
             }
             bakery[threadNum] = bakery[threadNum] / experimentNum;
-            System.out.printf("%.2f \\\\\n", bakery[threadNum]);
+            System.out.printf("%.2f \n", bakery[threadNum]);
         }
-        printResult(tournament, "Bakery lock");
+        printResult(bakery, "Bakery lock", coreNum);
+
+        printResult(tournament, bakery, coreNum);
     }
 
     private static long test(Lock lock, int threadNum, int iteration) throws InterruptedException {
@@ -61,11 +63,26 @@ public class Main {
         return timer.end().getElapsedTime();
     }
 
-    private static void printResult(double[] res, String lock) {
+    private static void printResult(double[] res, String lock, int coreNum) {
         System.out.printf("Final result for %s:\n", lock);
 
-        for (int i = 2; i < res.length; i++) {
+        for (int i = 2; i <= coreNum; i++) {
             System.out.printf("(%d,%.2f)\n", i, res[i]);
+        }
+
+        int half = coreNum / 2;
+        for (int i = 2; i <= half; i++) {
+            System.out.printf("%d & %.2f & %d & %.2f\n", i, res[i], i + half, res[i + half]);
+        }
+        System.out.println();
+    }
+
+    private static void printResult(double[] res1, double[] res2, int coreNum) {
+        System.out.println("Final result");
+
+        int half = coreNum / 2;
+        for (int i = 2; i <= half; i++) {
+            System.out.printf("%d & %.2f & %.2f & %d & %.2f & %.2f \\\\\n", i, res1[i], res2[i], i + half, res1[i + half], res2[i + half]);
         }
         System.out.println();
     }
