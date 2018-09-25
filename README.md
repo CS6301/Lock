@@ -11,20 +11,20 @@ __Directory Tree:__
 
     .
     ├── LICENSE
-    ├── README.md           # Current file.
+    ├── README.md                                       # Current file.
     ├── doc
-    │   ├── 24-result.txt   # A test output for 24 cores.
-    │   ├── 36-result.txt   # A test output for 36 cores.
-    │   ├── 48-result.txt   # A test output for 48 cores.
-    │   ├── report.pdf      # Report with plot analysis of the results.
-    │   └── report.tex      # Report source file.
+    │   ├── 24-result.txt                               # A test output for 24 cores.
+    │   ├── 36-result.txt                               # A test output for 36 cores.
+    │   ├── 48-result.txt                               # A test output for 48 cores.
+    │   ├── report.pdf                                  # Report with plot analysis of the results.
+    │   └── report.tex                                  # Report source file.
     └── src
         ├── META-INF
-        │   └── MANIFEST.MF # Jar packaging instruction.
-        ├── Main.java       # Program entry point, with test instruction.
+        │   └── MANIFEST.MF                             # Jar packaging instruction.
+        ├── Main.java                                   # Program entry point, with test instruction.
         ├── cs6301
         │   └── github
-        │       └── io      # Base Package
+        │       └── io                                  # Base Package
         │           ├── lock
         │           │   ├── Bakery.java                 # Bakery lock implementation
         │           │   ├── Lock.java                   # Lock interface
@@ -44,15 +44,13 @@ __Directory Tree:__
 Compilation and packaging are included in `makefile`. In `src` folder, the
 following commands can be used.
 
-    # create jar package in src folder.
-    # TestLock.jar will be created.
+    # create jar package in src folder. TestLock.jar will be created.
     make
 
     # cleanup jar and class file.
     make clean
 
-    # move jar to upper level.
-    # TestLock.jar will be moved to upper level.
+    # move jar to upper level. TestLock.jar will be moved to upper level.
     make install
 
 # Execution
