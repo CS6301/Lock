@@ -19,7 +19,7 @@ public class Main {
         double[] bakery = new double[coreNum + 2];
 
         System.out.println("Tournament lock benchmark:");
-        for (int threadNum = 2; threadNum <= coreNum; threadNum++) {
+        for (int threadNum = 1; threadNum <= coreNum; threadNum++) {
             System.out.printf("%d threads:\t", threadNum);
             for (int experiment = 0; experiment < experimentNum; experiment++) {
                 long res = test(new TournamentPetersonLock(threadNum), threadNum, iteration);
@@ -32,7 +32,7 @@ public class Main {
         printResult(tournament, "Tournament lock", coreNum);
         System.out.println();
         System.out.println("Bakery lock benchmark:");
-        for (int threadNum = 2; threadNum <= coreNum; threadNum++) {
+        for (int threadNum = 1; threadNum <= coreNum; threadNum++) {
             System.out.printf("%d threads:\t", threadNum);
             for (int experiment = 0; experiment < experimentNum; experiment++) {
                 long res = test(new Bakery(threadNum), threadNum, iteration);
@@ -66,12 +66,14 @@ public class Main {
     private static void printResult(double[] res, String lock, int coreNum) {
         System.out.printf("Final result for %s:\n", lock);
 
-        for (int i = 2; i <= coreNum; i++) {
+        System.out.println("plot format:");
+        for (int i = 1; i <= coreNum; i++) {
             System.out.printf("(%d,%.2f)\n", i, res[i]);
         }
 
+        System.out.println("table format:");
         int half = coreNum / 2;
-        for (int i = 2; i <= half; i++) {
+        for (int i = 1; i <= half; i++) {
             System.out.printf("%d & %.2f & %d & %.2f\n", i, res[i], i + half, res[i + half]);
         }
         System.out.println();
@@ -81,7 +83,7 @@ public class Main {
         System.out.println("Final result");
 
         int half = coreNum / 2;
-        for (int i = 2; i <= half; i++) {
+        for (int i = 1; i <= half; i++) {
             System.out.printf("%d & %.2f & %.2f & %d & %.2f & %.2f \\\\\n", i, res1[i], res2[i], i + half, res1[i + half], res2[i + half]);
         }
         System.out.println();
