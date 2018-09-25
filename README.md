@@ -2,10 +2,42 @@
 
 Implementation and benchmark of Tournament Peterson Lock and Bakery Lock.
 
-Author:
+__Author:__
 
 - Hanlin He (hxh160630@utdallas.edu)
 - Lizhong Zhang (lxz160730@utdallas.edu)
+
+__Directory Tree:__
+
+    .
+    ├── LICENSE
+    ├── README.md           # Current file.
+    ├── doc
+    │   ├── 24-result.txt   # A test output for 24 cores.
+    │   ├── 36-result.txt   # A test output for 36 cores.
+    │   ├── 48-result.txt   # A test output for 48 cores.
+    │   ├── report.pdf      # Report with plot analysis of the results.
+    │   └── report.tex      # Report source file.
+    └── src
+        ├── META-INF
+        │   └── MANIFEST.MF # Jar packaging instruction.
+        ├── Main.java       # Program entry point, with test instruction.
+        ├── cs6301
+        │   └── github
+        │       └── io      # Base Package
+        │           ├── lock
+        │           │   ├── Bakery.java                 # Bakery lock implementation
+        │           │   ├── Lock.java                   # Lock interface
+        │           │   ├── PetersonLock.java           # Peterson lock implementation.
+        │           │   └── TournamentPetersonLock.java # Tournament lock using Peterson lock implementation.
+        │           ├── math
+        │           │   └── IntegerMath.java            # Helper math function to compute log2
+        │           └── test
+        │               ├── TestLock.java               # Single test thread experiment definition.
+        │               └── Timer.java                  # Helper time collection class.
+        └── makefile                                    # GNU Make file.
+
+    9 directories, 17 files
 
 ## Compile
 
