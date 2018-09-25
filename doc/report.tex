@@ -1,0 +1,460 @@
+\documentclass{article}
+
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\renewcommand{\axisdefaultheight}{190pt}
+\newcommand*{\bigO}[1]{\ensuremath{\mathcal{O}\left(#1\right)}}
+
+\title{Programming Assignment 1 Report}
+\author{
+    Hanlin He\footnote{\texttt{hxh160630@utdallas.edu}},
+    Lizhong Zhang\footnote{\texttt{lxz160730@utdallas.edu}}
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+We run experiments using 24, 36 and 48 cores, with threads number ranging
+from 2 up to the number of cores. Each experiment runs 20 to 30 times and the
+average running times were used to minimize Java GC overhead.
+
+\section*{Result \& Analysis}
+
+Note: All time result is in millisecond.
+
+\subsection*{24 Cores}
+The experiment results for 24 cores are plotted in \cref{exp_plot_24} and detailed
+results are shown in \cref{exp_table_24}.
+
+\begin{figure}[H]
+    \caption{Experiment Results 1}
+    \label{exp_plot_24}
+\begin{tikzpicture}
+\begin{axis}[
+    width=.95\textwidth,
+    height=\axisdefaultheight,
+    title={Running Time Comparison for 24 Cores},
+    xlabel={Number of Threads},
+    ylabel={Running time [millisecond]},
+    xmin=1, xmax=25,
+    ymin=0, ymax=6000,
+    xtick={5,10,15,20,25},
+    ytick={0,1000,2000,3000,4000,5000},
+    legend pos=north west,
+    ymajorgrids=true,
+    grid style=dashed,
+]
+\addplot[
+    color=blue,
+    mark=square,
+    ]
+    coordinates {
+        (2,111.67)
+        (3,192.40)
+        (4,242.87)
+        (5,393.63)
+        (6,479.20)
+        (7,537.57)
+        (8,609.07)
+        (9,940.77)
+        (10,1000.73)
+        (11,1121.40)
+        (12,1176.90)
+        (13,1285.67)
+        (14,1362.33)
+        (15,1481.53)
+        (16,1576.43)
+        (17,2080.53)
+        (18,2338.17)
+        (19,2367.43)
+        (20,2354.27)
+        (21,2507.73)
+        (22,2543.33)
+        (23,2649.60)
+        (24,2794.80)
+    };
+\addplot[
+    color=red,
+    mark=*,
+    ]
+    coordinates {
+        (2,138.10)
+        (3,284.00)
+        (4,428.50)
+        (5,596.03)
+        (6,743.97)
+        (7,930.50)
+        (8,1095.20)
+        (9,1318.07)
+        (10,1507.87)
+        (11,1743.23)
+        (12,2025.40)
+        (13,2245.40)
+        (14,2635.80)
+        (15,3116.20)
+        (16,3097.20)
+        (17,3564.60)
+        (18,3969.47)
+        (19,4301.77)
+        (20,4338.03)
+        (21,4774.53)
+        (22,5168.03)
+        (23,5084.77)
+        (24,5839.93)
+    };
+    \legend{Tournament Lock, Bakery Lock}
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+
+\begin{table}[H]
+    \caption{Result Detail of Lock Benchmark Experiment on 24 Cores}
+    \label{exp_table_24}
+    \centering
+    \begin{tabular}{c|ll|c|ll}
+        \toprule
+        \multirow{2}{*}{Cores} & \multicolumn{2}{|c|}{Running Time} &
+        \multirow{2}{*}{Cores} & \multicolumn{2}{|c}{Running Time} \\
+                               & Tournament & Bakery & & Tournament & Bakery \\\midrule
+        2 & 111.67 & 138.10 & 14 & 1362.33 & 2635.80 \\
+        3 & 192.40 & 284.00 & 15 & 1481.53 & 3116.20 \\
+        4 & 242.87 & 428.50 & 16 & 1576.43 & 3097.20 \\
+        5 & 393.63 & 596.03 & 17 & 2080.53 & 3564.60 \\
+        6 & 479.20 & 743.97 & 18 & 2338.17 & 3969.47 \\
+        7 & 537.57 & 930.50 & 19 & 2367.43 & 4301.77 \\
+        8 & 609.07 & 1095.20 & 20 & 2354.27 & 4338.03 \\
+        9 & 940.77 & 1318.07 & 21 & 2507.73 & 4774.53 \\
+        10 & 1000.73 & 1507.87 & 22 & 2543.33 & 5168.03 \\
+        11 & 1121.40 & 1743.23 & 23 & 2649.60 & 5084.77 \\
+        12 & 1176.90 & 2025.40 & 24 & 2794.80 & 5839.93 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\subsection*{36 Cores}
+The experiment results for 36 cores are plotted in \cref{exp_plot_36} and detailed
+results are shown in \cref{exp_table_36}.
+
+\begin{figure}[H]
+    \caption{Experiment Results 2}
+    \label{exp_plot_36}
+\begin{tikzpicture}
+\begin{axis}[
+    width=.95\textwidth,
+    height=\axisdefaultheight,
+    title={Running Time Comparison for 36 Cores},
+    xlabel={Number of Threads},
+    ylabel={Running time [millisecond]},
+    xmin=0, xmax=38,
+    ymin=0, ymax=16000,
+    xtick={0,5,10,15,20,25,30,35},
+    ytick={0,2000,4000,6000,8000,10000,12000,14000},
+    legend pos=north west,
+    ymajorgrids=true,
+    grid style=dashed,
+]
+\addplot[
+    color=blue,
+    mark=square,
+    ]
+    coordinates {
+        (2,108.60)
+        (3,187.50)
+        (4,237.90)
+        (5,367.83)
+        (6,435.90)
+        (7,495.70)
+        (8,556.00)
+        (9,832.43)
+        (10,934.57)
+        (11,961.30)
+        (12,1100.77)
+        (13,1123.20)
+        (14,1144.30)
+        (15,1318.83)
+        (16,1361.93)
+        (17,1938.60)
+        (18,2100.47)
+        (19,2095.17)
+        (20,2098.40)
+        (21,2260.77)
+        (22,2274.37)
+        (23,2402.97)
+        (24,2481.80)
+        (25,2462.07)
+        (26,2587.23)
+        (27,2753.10)
+        (28,3033.20)
+        (29,2742.43)
+        (30,2940.60)
+        (31,3157.70)
+        (32,3425.97)
+        (33,4159.00)
+        (34,4588.13)
+        (35,4284.10)
+        (36,4462.57)
+    };
+\addplot[
+    color=red,
+    mark=*,
+    ]
+    coordinates {
+        (2,144.30)
+        (3,267.10)
+        (4,403.43)
+        (5,542.77)
+        (6,708.53)
+        (7,877.13)
+        (8,1072.63)
+        (9,1234.83)
+        (10,1456.87)
+        (11,1638.50)
+        (12,1859.93)
+        (13,2162.27)
+        (14,2445.57)
+        (15,2633.50)
+        (16,3114.20)
+        (17,2947.57)
+        (18,3511.90)
+        (19,4044.23)
+        (20,4501.37)
+        (21,4351.93)
+        (22,5700.77)
+        (23,4957.57)
+        (24,5256.73)
+        (25,6271.00)
+        (26,5844.63)
+        (27,7074.47)
+        (28,7702.20)
+        (29,7222.77)
+        (30,8957.37)
+        (31,8946.53)
+        (32,8439.90)
+        (33,10263.80)
+        (34,10560.00)
+        (35,10131.47)
+        (36,15317.33)
+    };
+    \legend{Tournament Lock, Bakery Lock}
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+
+\begin{table}[H]
+    \caption{Result Detail of Lock Benchmark Experiment on 36 Cores}
+    \label{exp_table_36}
+    \centering
+    \begin{tabular}{c|ll|c|ll}
+        \toprule
+        \multirow{2}{*}{Cores} & \multicolumn{2}{|c|}{Running Time} &
+        \multirow{2}{*}{Cores} & \multicolumn{2}{|c}{Running Time} \\
+                               & Tournament & Bakery & & Tournament & Bakery \\\midrule
+        2 & 108.60 & 144.30 & 20 & 2098.40 & 4501.37 \\
+        3 & 187.50 & 267.10 & 21 & 2260.77 & 4351.93 \\
+        4 & 237.90 & 403.43 & 22 & 2274.37 & 5700.77 \\
+        5 & 367.83 & 542.77 & 23 & 2402.97 & 4957.57 \\
+        6 & 435.90 & 708.53 & 24 & 2481.80 & 5256.73 \\
+        7 & 495.70 & 877.13 & 25 & 2462.07 & 6271.00 \\
+        8 & 556.00 & 1072.63 & 26 & 2587.23 & 5844.63 \\
+        9 & 832.43 & 1234.83 & 27 & 2753.10 & 7074.47 \\
+        10 & 934.57 & 1456.87 & 28 & 3033.20 & 7702.20 \\
+        11 & 961.30 & 1638.50 & 29 & 2742.43 & 7222.77 \\
+        12 & 1100.77 & 1859.93 & 30 & 2940.60 & 8957.37 \\
+        13 & 1123.20 & 2162.27 & 31 & 3157.70 & 8946.53 \\
+        14 & 1144.30 & 2445.57 & 32 & 3425.97 & 8439.90 \\
+        15 & 1318.83 & 2633.50 & 33 & 4159.00 & 10263.80 \\
+        16 & 1361.93 & 3114.20 & 34 & 4588.13 & 10560.00 \\
+        17 & 1938.60 & 2947.57 & 35 & 4284.10 & 10131.47 \\
+        18 & 2100.47 & 3511.90 & 36 & 4462.57 & 15317.33 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection*{48 Cores}
+The experiment results for 48 cores are plotted in \cref{exp_plot_48} and
+detailed results are shown in \cref{exp_table_48}.
+
+\begin{figure}[H]
+    \caption{Experiment Results 1}
+    \label{exp_plot_48}
+\begin{tikzpicture}
+\begin{axis}[
+    width=.95\textwidth,
+    height=\axisdefaultheight,
+    title={Running Time Comparison for 48 Cores},
+    xlabel={Number of Threads},
+    ylabel={Running time [millisecond]},
+    xmin=0, xmax=50,
+    ymin=0, ymax=20000,
+    xtick={0,10,20,30,40,50},
+    ytick={0,2000,4000,6000,8000,10000,12000,14000,16000,18000},
+    legend pos=north west,
+    ymajorgrids=true,
+    grid style=dashed,
+]
+
+\addplot[
+    color=blue,
+    mark=square,
+    ]
+    coordinates {
+        (2,100.80)
+        (3,181.20)
+        (4,192.67)
+        (5,333.80)
+        (6,384.00)
+        (7,464.00)
+        (8,510.07)
+        (9,801.40)
+        (10,847.80)
+        (11,876.53)
+        (12,915.87)
+        (13,1057.20)
+        (14,1200.60)
+        (15,1103.40)
+        (16,1210.73)
+        (17,1759.60)
+        (18,1623.20)
+        (19,1784.00)
+        (20,1794.40)
+        (21,1928.93)
+        (22,1843.27)
+        (23,2208.07)
+        (24,2365.73)
+        (25,2242.80)
+        (26,2451.73)
+        (27,2458.00)
+        (28,2595.27)
+        (29,2540.93)
+        (30,2663.00)
+        (31,2886.33)
+        (32,3206.93)
+        (33,4052.20)
+        (34,3591.13)
+        (35,3697.07)
+        (36,3929.40)
+        (37,3882.00)
+        (38,4361.53)
+        (39,4395.13)
+        (40,4194.53)
+        (41,4608.87)
+        (42,4411.53)
+        (43,4518.93)
+        (44,4714.53)
+        (45,4687.53)
+        (46,4936.40)
+        (47,5242.67)
+        (48,4989.13)
+    };
+\addplot[
+    color=red,
+    mark=*,
+    ]
+    coordinates {
+        (2,75.27)
+        (3,218.80)
+        (4,346.73)
+        (5,456.53)
+        (6,632.60)
+        (7,719.40)
+        (8,924.60)
+        (9,1030.13)
+        (10,1193.87)
+        (11,1356.93)
+        (12,2061.93)
+        (13,1857.33)
+        (14,2135.60)
+        (15,2326.87)
+        (16,2646.33)
+        (17,2901.00)
+        (18,3160.40)
+        (19,3654.80)
+        (20,3761.20)
+        (21,4249.40)
+        (22,4631.13)
+        (23,4433.40)
+        (24,5093.67)
+        (25,4804.00)
+        (26,5170.53)
+        (27,7789.40)
+        (28,8593.53)
+        (29,6185.13)
+        (30,6191.47)
+        (31,8042.40)
+        (32,7939.00)
+        (33,9169.60)
+        (34,8967.07)
+        (35,8950.40)
+        (36,9461.40)
+        (37,10331.40)
+        (38,9498.00)
+        (39,11176.47)
+        (40,12038.40)
+        (41,13246.00)
+        (42,12458.40)
+        (43,12840.73)
+        (44,18753.47)
+        (45,15528.53)
+        (46,14493.67)
+        (47,16339.20)
+        (48,17033.67)
+    };
+    \legend{Tournament Lock, Bakery Lock}
+\end{axis}
+\end{tikzpicture}
+\end{figure}
+
+\begin{table}[H]
+    \caption{Result Detail of Lock Benchmark Experiment on 48 Cores}
+    \label{exp_table_48}
+    \centering
+    \begin{tabular}{c|ll|c|ll}
+        \toprule
+        \multirow{2}{*}{Cores} & \multicolumn{2}{|c|}{Running Time} &
+        \multirow{2}{*}{Cores} & \multicolumn{2}{|c}{Running Time} \\
+                               & Tournament & Bakery & & Tournament & Bakery \\\midrule
+        2 & 100.80 & 75.27 & 26 & 2451.73 & 5170.53 \\
+        3 & 181.20 & 218.80 & 27 & 2458.00 & 7789.40 \\
+        4 & 192.67 & 346.73 & 28 & 2595.27 & 8593.53 \\
+        5 & 333.80 & 456.53 & 29 & 2540.93 & 6185.13 \\
+        6 & 384.00 & 632.60 & 30 & 2663.00 & 6191.47 \\
+        7 & 464.00 & 719.40 & 31 & 2886.33 & 8042.40 \\
+        8 & 510.07 & 924.60 & 32 & 3206.93 & 7939.00 \\
+        9 & 801.40 & 1030.13 & 33 & 4052.20 & 9169.60 \\
+        10 & 847.80 & 1193.87 & 34 & 3591.13 & 8967.07 \\
+        11 & 876.53 & 1356.93 & 35 & 3697.07 & 8950.40 \\
+        12 & 915.87 & 2061.93 & 36 & 3929.40 & 9461.40 \\
+        13 & 1057.20 & 1857.33 & 37 & 3882.00 & 10331.40 \\
+        14 & 1200.60 & 2135.60 & 38 & 4361.53 & 9498.00 \\
+        15 & 1103.40 & 2326.87 & 39 & 4395.13 & 11176.47 \\
+        16 & 1210.73 & 2646.33 & 40 & 4194.53 & 12038.40 \\
+        17 & 1759.60 & 2901.00 & 41 & 4608.87 & 13246.00 \\
+        18 & 1623.20 & 3160.40 & 42 & 4411.53 & 12458.40 \\
+        19 & 1784.00 & 3654.80 & 43 & 4518.93 & 12840.73 \\
+        20 & 1794.40 & 3761.20 & 44 & 4714.53 & 18753.47 \\
+        21 & 1928.93 & 4249.40 & 45 & 4687.53 & 15528.53 \\
+        22 & 1843.27 & 4631.13 & 46 & 4936.40 & 14493.67 \\
+        23 & 2208.07 & 4433.40 & 47 & 5242.67 & 16339.20 \\
+        24 & 2365.73 & 5093.67 & 48 & 4989.13 & 17033.67 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section*{Conclusion}
+
+Based on our experiments, tournament lock's running time is approximately
+\bigO{n}, where $n$ is the number of threads. Bakery lock's running time is longer than tournament lock, and closer
+to \bigO{n^2}.
+
+A side node: For our implementation, tournament lock works fine if the number
+of threads is slightly larger than the number of cores, but the bakery lock's
+performance would drop dramatically in such scenarios.
+
+\end{document}
