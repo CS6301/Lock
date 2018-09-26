@@ -9,49 +9,53 @@ __Author:__
 
 __Directory Tree:__
 
-    .
-    ├── LICENSE
-    ├── README.md                                       # Current file.
-    ├── doc
-    │   ├── 24-result.txt                               # A test output for 24 cores.
-    │   ├── 36-result.txt                               # A test output for 36 cores.
-    │   ├── 48-result.txt                               # A test output for 48 cores.
-    │   ├── report.pdf                                  # Report with plot analysis of the results.
-    │   └── report.tex                                  # Report source file.
-    └── src
-        ├── META-INF
-        │   └── MANIFEST.MF                             # Jar packaging instruction.
-        ├── Main.java                                   # Program entry point, with test instruction.
-        ├── cs6301
-        │   └── github
-        │       └── io                                  # Base Package
-        │           ├── lock
-        │           │   ├── Bakery.java                 # Bakery lock implementation
-        │           │   ├── Lock.java                   # Lock interface
-        │           │   ├── PetersonLock.java           # Peterson lock implementation.
-        │           │   └── TournamentPetersonLock.java # Tournament lock using Peterson lock implementation.
-        │           ├── math
-        │           │   └── IntegerMath.java            # Helper math function to compute log2
-        │           └── test
-        │               ├── TestLock.java               # Single test thread experiment definition.
-        │               └── Timer.java                  # Helper time collection class.
-        └── makefile                                    # GNU Make file.
+```bash
+.
+├── LICENSE
+├── README.md                                       # Current file.
+├── doc
+│   ├── 24-result.txt                               # A test output for 24 cores.
+│   ├── 36-result.txt                               # A test output for 36 cores.
+│   ├── 48-result.txt                               # A test output for 48 cores.
+│   ├── report.pdf                                  # Report with plot analysis of the results.
+│   └── report.tex                                  # Report source file.
+└── src
+    ├── META-INF
+    │   └── MANIFEST.MF                             # Jar packaging instruction.
+    ├── Main.java                                   # Program entry point, with test instruction.
+    ├── cs6301
+    │   └── github
+    │       └── io                                  # Base Package
+    │           ├── lock
+    │           │   ├── Bakery.java                 # Bakery lock implementation
+    │           │   ├── Lock.java                   # Lock interface
+    │           │   ├── PetersonLock.java           # Peterson lock implementation.
+    │           │   └── TournamentPetersonLock.java # Tournament lock using Peterson lock implementation.
+    │           ├── math
+    │           │   └── IntegerMath.java            # Helper math function to compute log2
+    │           └── test
+    │               ├── TestLock.java               # Single test thread experiment definition.
+    │               └── Timer.java                  # Helper time collection class.
+    └── makefile                                    # GNU Make file.
 
-    9 directories, 17 files
+9 directories, 17 files
+```
 
 ## Compile
 
 Compilation and packaging are included in `makefile`. In `src` folder, the
 following commands can be used.
 
-    # create jar package in src folder. TestLock.jar will be created.
-    make
+```bash
+# create jar package in src folder. TestLock.jar will be created.
+make
 
-    # cleanup jar and class file.
-    make clean
+# cleanup jar and class file.
+make clean
 
-    # move jar to upper level. TestLock.jar will be moved to upper level.
-    make install
+# move jar to upper level. TestLock.jar will be moved to upper level.
+make install
+```
 
 # Execution
 
@@ -64,7 +68,9 @@ simplicity.
 
 To execute, use command:
 
-    java -jar <jar-file> <num of cores> <num of iteration> <num of experiment>
+```bash
+java -jar <jar-file> <num of cores> <num of iteration> <num of experiment>
+```
 
 After execution, the program would output experiments results and summary in
 format of latex plot/table that can be adopted if needed in latex.
