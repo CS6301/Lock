@@ -1,6 +1,6 @@
 # Lock
 
-Implementation and benchmark of Tournament Peterson Lock and Bakery Lock.
+Implementation and benchmark of Tournament Peterson Lock and Bakery Lock. This project is the course work of CS6301 Intro to Multicore Programming.
 
 __Author:__
 
